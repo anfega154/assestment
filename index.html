@@ -7,12 +7,24 @@
 <style>
 :root{--bg:#070a0f;--panel:#0c121b;--panel2:#101925;--ink:#eef4ff;--muted:#91a0b5;--line:#253247;--cyan:#5eead4;--blue:#60a5fa;--amber:#fbbf24;--red:#fb7185;--green:#86efac;--code:#080d14;--shadow:0 18px 50px #0008}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body:before{content:"";position:fixed;inset:0;background:linear-gradient(125deg,#07111a 0%,#070a0f 52%,#0b1018 100%);pointer-events:none}.deck{height:100%;position:relative}.slide{position:absolute;inset:0;display:none;opacity:0;padding:42px 64px 72px;overflow:auto}.slide.active{display:flex;flex-direction:column;animation:enter .32s ease forwards}@keyframes enter{to{opacity:1}}.slide-no{font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}.slide h1{font-size:clamp(42px,6vw,78px);letter-spacing:-.055em;line-height:.98;margin:0}.slide h2{font-size:clamp(28px,3.3vw,48px);letter-spacing:-.035em;line-height:1.05;margin:0 0 18px}.slide h3{font-size:16px;margin:0 0 7px}.hero{justify-content:center}.hero p{font-size:clamp(18px,2vw,28px);color:var(--muted);margin:18px 0 0}.hero .name{color:var(--cyan);font:700 18px ui-monospace,monospace;margin-bottom:18px}.accent{color:var(--cyan)}.blue{color:var(--blue)}.amber{color:var(--amber)}.red{color:var(--red)}.muted{color:var(--muted)}.lead{font-size:18px;line-height:1.45;color:#c4d0e0;margin:0}.brief{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.brief>div{border-left:3px solid var(--blue);background:#0b1119;padding:11px 14px;border-radius:0 12px 12px 0}.brief>div:nth-child(2){border-color:var(--cyan)}.label{display:block;color:var(--muted);font:700 10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}.brief strong{font-size:14px;line-height:1.35}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-height:0}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.span2{grid-column:span 2}.panel{background:linear-gradient(145deg,#0d151f,#0a1018);border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0}.panel h3{color:#d9e6f8}.panel p,.panel li{font-size:13px;line-height:1.45;color:var(--muted)}.panel ul{margin:8px 0 0;padding-left:18px}.code{background:var(--code);border:1px solid #1f2d40;border-radius:14px;padding:15px 17px;overflow:auto;white-space:pre;font:12px/1.48 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#dce8f8;tab-size:2}.code .kw{color:#c4b5fd}.code .fn{color:var(--blue)}.code .op{color:var(--cyan)}.code .str{color:#fcd34d}.code .cm{color:#64748b}.code .err{color:var(--red)}.flow{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;padding:14px 8px;background:#080e15;border:1px solid var(--line);border-radius:16px}.node{padding:11px 13px;border:1px solid #33465f;border-radius:11px;background:#101a27;text-align:center;font:700 11px/1.25 ui-monospace,monospace;min-width:88px}.node.cyan{border-color:#2f7d75;color:var(--cyan)}.node.blue{border-color:#315b83;color:var(--blue)}.node.amber{border-color:#846720;color:var(--amber)}.node.red{border-color:#7f3342;color:#fda4af}.arrow{font:700 20px ui-monospace,monospace;color:#56708e}.flow.vertical{flex-direction:column;align-items:stretch}.flow.vertical .node{width:100%}.flow.vertical .arrow{text-align:center;transform:rotate(90deg);line-height:.7}.flow-label{font:600 10px ui-monospace,monospace;color:var(--muted);text-align:center}.decision{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px;margin-top:12px}.decision>div{border-top:2px solid var(--cyan);padding:9px 11px;background:#0b1119;border-radius:0 0 10px 10px;font-size:12px;line-height:1.35;color:#c3cfdf}.decision>div:nth-child(2){border-color:var(--amber)}.decision>div:nth-child(3){border-color:var(--red)}.decision b{display:block;color:var(--ink);margin-bottom:3px}.source{margin-top:auto;padding-top:10px;color:#6f8098;font:10px ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.assessment{width:100%;border-collapse:separate;border-spacing:0 7px;font-size:14px}.assessment th{text-align:left;color:var(--muted);font:700 10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.1em;padding:0 14px 5px}.assessment td{background:#0d141e;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 14px}.assessment td:first-child{border-left:1px solid var(--line);border-radius:10px 0 0 10px;font-weight:700}.assessment td:last-child{border-right:1px solid var(--line);border-radius:0 10px 10px 0;color:#bac7d8}.assessment .level{font:800 20px ui-monospace,monospace;color:var(--cyan)}.lanes{display:grid;grid-template-columns:90px 1fr;gap:8px 12px;align-items:center}.lane-label{font:700 11px ui-monospace,monospace;color:var(--muted)}.timeline{height:28px;display:flex;gap:4px;align-items:center}.task{height:22px;border-radius:6px;background:#1d4ed8;color:#dbeafe;font:700 10px ui-monospace,monospace;display:flex;align-items:center;justify-content:center}.tA{width:46%}.tB{width:22%}.tC{width:34%}.serial .task{width:29%}.legend{display:flex;gap:14px;color:var(--muted);font-size:11px;margin-top:8px}.callout{border-left:3px solid var(--amber);background:#17130a;padding:11px 13px;border-radius:0 11px 11px 0;color:#dfd1a2;font-size:12px;line-height:1.4}.callout.red{border-color:var(--red);background:#190d12;color:#f3bdc7}.arch{display:grid;grid-template-columns:1fr 54px 1fr 54px 1fr 54px 1fr;align-items:center;gap:4px;padding:22px 8px}.arch .arrow{text-align:center}.fork{display:grid;grid-template-columns:1fr 1.3fr;gap:10px}.routes{display:grid;gap:7px}.route{display:grid;grid-template-columns:110px 1fr 130px;align-items:center;gap:8px;padding:8px 10px;background:#0b1119;border:1px solid var(--line);border-radius:10px;font:700 10px ui-monospace,monospace}.route span:nth-child(2){height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue));position:relative}.route span:nth-child(2):after{content:"";position:absolute;right:-1px;top:-4px;border-left:7px solid var(--blue);border-top:5px solid transparent;border-bottom:5px solid transparent}.state-img{position:relative;height:245px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000}.state-img img{width:100%;height:100%;object-fit:contain;opacity:.76}.badge{display:inline-flex;padding:5px 8px;border:1px solid #315b83;border-radius:999px;color:var(--blue);font:700 10px ui-monospace,monospace;margin-right:6px}.bigmap{display:grid;grid-template-columns:1fr 2fr;gap:8px;font-size:13px}.bigmap div{padding:12px 14px;border-bottom:1px solid var(--line)}.bigmap div:nth-child(odd){font-weight:800;color:var(--cyan);font-family:ui-monospace,monospace}.bigmap div:nth-child(even){color:#c5d1e1}.controls{position:fixed;left:0;right:0;bottom:0;height:50px;display:flex;align-items:center;padding:0 20px;gap:12px;background:linear-gradient(transparent,#070a0ff2 42%);z-index:20}.counter{font:700 10px ui-monospace,monospace;color:var(--muted);min-width:58px}.titlemini{font:600 10px ui-monospace,monospace;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nav{margin-left:auto;display:flex;gap:6px}.btn{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:#0d141e;cursor:pointer}.btn:hover{border-color:var(--cyan)}.progress{position:fixed;left:0;right:0;bottom:0;height:3px;background:#1a2330;z-index:30}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:width .25s}.endline{font:800 clamp(35px,5.2vw,68px)/1.05 ui-monospace,monospace;max-width:1050px}.stack{color:var(--muted);font:700 clamp(16px,1.9vw,24px) ui-monospace,monospace;margin-top:28px}.questions{color:var(--cyan);font:800 clamp(28px,3.4vw,46px) ui-monospace,monospace;margin-top:36px}.compact{font-size:11px}.tight{margin-top:10px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.controls-note{position:fixed;right:20px;top:16px;color:#3e4d62;font:9px ui-monospace,monospace;z-index:5}
+.gap-badge{position:fixed;left:20px;top:14px;z-index:25;display:none;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:linear-gradient(145deg,#0d151f,#0a1018);border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow);max-width:min(70vw,640px)}
+.gap-badge.on{display:inline-flex}
+.gap-badge .gap-k{font:700 9px ui-monospace,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.gap-badge .gap-name{font:800 12px ui-monospace,monospace;color:var(--cyan);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gap-badge .gap-lvl{font:800 11px ui-monospace,monospace;color:#0a0f16;background:var(--cyan);border-radius:999px;padding:2px 8px;line-height:1.3}
+.gap-badge.brecha .gap-name{color:var(--amber)}
+.gap-badge.brecha .gap-lvl{background:var(--amber)}
+.gap-badge.fortaleza .gap-name{color:var(--green)}
+.gap-badge.fortaleza .gap-lvl{background:var(--green)}
+.gap-badge .gap-tag{font:700 8px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);border-left:1px solid var(--line);padding-left:8px}
+@media(max-width:980px){.gap-badge{max-width:calc(100vw - 40px)}.controls-note{display:none}}
 @media(max-width:980px){.slide{padding:30px 34px 66px}.grid2,.brief,.fork{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.decision{grid-template-columns:1fr}.arch{grid-template-columns:1fr}.arch .arrow{transform:rotate(90deg)}.span2{grid-column:auto}.source{white-space:normal}.assessment{font-size:12px}.code{font-size:10px}.state-img{height:190px}}
 @media(max-height:760px) and (min-width:981px){.slide{padding-top:28px}.slide h2{font-size:32px;margin-bottom:12px}.brief{margin-bottom:10px}.panel{padding:12px}.code{font-size:10px;padding:11px}.decision{margin-top:8px}.node{padding:8px 10px}.state-img{height:190px}}
 </style>
 </head>
 <body>
 <div class="controls-note">← → navegar · F fullscreen · Home/End</div>
+<div class="gap-badge" id="gapBadge"><span class="gap-tag" id="gapTag">Brecha</span><span class="gap-k">Competencia</span><span class="gap-name" id="gapName"></span><span class="gap-lvl" id="gapLvl"></span></div>
 <main class="deck">
 <section class="slide hero" data-title="Portada">
   <div class="name">ANDRÉS FELIPE GAÑAN MORENO</div>
@@ -39,7 +51,7 @@
   <div class="source">Fuente · last_assestment.md</div>
 </section>
 
-<section class="slide" data-title="WebFlux · procesamiento masivo">
+<section class="slide" data-title="WebFlux · procesamiento masivo" data-gap="Concurrencia" data-level="3" data-kind="brecha">
   <div class="slide-no">03 · WebFlux / Reactor</div>
   <h2>Procesamiento de archivos sin cargar todo en memoria</h2>
   <div class="brief"><div><span class="label">Problema</span><strong>Procesar miles de recargas desde S3 sin retener el archivo completo ni desordenar operaciones.</strong></div><div><span class="label">Solución</span><strong>S3AsyncClient, parser incremental, lotes de 100 y ejecución ordenada con concatMap.</strong></div></div>
@@ -58,7 +70,7 @@
   <div class="source">gift-card-back-bulk-authorizations · EjecucionRecargaMasivaUseCase.java · ArchivoRecargaMasivaS3Adapter.java</div>
 </section>
 
-<section class="slide" data-title="Reactor · concurrencia y presión">
+<section class="slide" data-title="Reactor · concurrencia y presión" data-gap="Concurrencia" data-level="3" data-kind="brecha">
   <div class="slide-no">04 · Concurrencia</div>
   <h2>Orden, demanda y límites de concurrencia</h2>
   <div class="grid2">
@@ -77,7 +89,7 @@
   <div class="source">gift-card-back-bulk-authorizations · ArchivoRecargaMasivaS3Adapter.java · ProcesadorRecargaMasivaProgramado.java</div>
 </section>
 
-<section class="slide" data-title="Spring · DI y beans">
+<section class="slide" data-title="Spring · DI y beans" data-gap="Frameworks" data-level="3" data-kind="brecha">
   <div class="slide-no">05 · Spring Boot</div>
   <h2>Dos conexiones R2DBC sin ambigüedad de beans</h2>
   <div class="brief"><div><span class="label">Problema</span><strong>READ y WRITE implementan ConnectionFactory. La inyección por tipo produce más de un candidato.</strong></div><div><span class="label">Solución</span><strong>Nombres de bean, @Qualifier en cada consumidor y @Primary para la selección por defecto.</strong></div></div>
@@ -100,7 +112,7 @@
   <div class="source">gift-card-back-auth · R2dbcConfig.java</div>
 </section>
 
-<section class="slide" data-title="Multitenancy reactivo">
+<section class="slide" data-title="Multitenancy reactivo" data-gap="Frameworks" data-level="3" data-kind="brecha">
   <div class="slide-no">06 · Security + Reactor Context</div>
   <h2>JWT validado, contexto por suscripción y schema por conexión</h2>
   <div class="flow"><span class="node blue">Bearer JWT</span><span class="arrow">→</span><span class="node">ReactiveJwtDecoder<br>JWKS + firma</span><span class="arrow">→</span><span class="node cyan">TenantContext</span><span class="arrow">→</span><span class="node">ConnectionFactory</span><span class="arrow">→</span><span class="node amber">SET search_path</span><span class="arrow">→</span><span class="node">schema tenant</span></div>
@@ -121,7 +133,7 @@
   <div class="source">gift-card-back-jwt-filter-library · TenantJwtWebFilter.java · TenantContext.java · TenantConnectionFactoryWrapper.java</div>
 </section>
 
-<section class="slide" data-title="Arquitectura limpia">
+<section class="slide" data-title="Arquitectura limpia" data-gap="Frameworks" data-level="3" data-kind="brecha">
   <div class="slide-no">07 · Arquitectura</div>
   <h2>El caso de uso depende de contratos, no de Mongo ni HTTP</h2>
   <div class="arch"><span class="node blue">HTTP Handler<br>WebFlux</span><span class="arrow">→</span><span class="node">Input Port<br>FranchiseInputPort</span><span class="arrow">→</span><span class="node cyan">Use Case<br>FranchiseUseCase</span><span class="arrow">→</span><span class="node amber">Repository Port<br>FranchiseRepository</span></div>
@@ -149,40 +161,42 @@
   <div class="source">Franquicias · FranchiseUseCase.java · FranchiseRepository.java · MongoRepositoryAdapter.java · Handler.java</div>
 </section>
 
-<section class="slide" data-title="ASULADO · fan-out">
-  <div class="slide-no">08 · AWS messaging · ASULADO</div>
-  <h2>Un resultado del motor alimenta consumidores independientes</h2>
-  <div class="brief"><div><span class="label">Problema</span><strong>Notificación y orquestación necesitan reaccionar al mismo resultado sin llamadas síncronas entre aplicaciones.</strong></div><div><span class="label">Solución</span><strong>SQS de salida, Pipe hacia EventBridge, reglas por topic y una cola por consumidor.</strong></div></div>
+<section class="slide" data-title="Event-driven · Fan-Out" data-gap="Cloud" data-level="4" data-kind="fortaleza">
+  <div class="slide-no">08 · EventBridge · Pipes · SQS · Fan-Out</div>
+  <h2>Un evento del motor de reglas se distribuye a consumidores aislados</h2>
+  <div class="brief"><div><span class="label">Problema</span><strong>Novedades, notificación core y la orquestación deben reaccionar al mismo resultado sin acoplarse ni llamarse de forma síncrona.</strong></div><div><span class="label">Solución</span><strong>SQS de salida, EventBridge Pipe hacia el Event Bus, rules por MessageAttribute y una cola dedicada por consumidor.</strong></div></div>
+  <div class="flow"><span class="node blue">MS novedades</span><span class="arrow">→</span><span class="node">q-novedades-result</span><span class="arrow">→</span><span class="node amber">Pipe<br>EventBridge</span><span class="arrow">→</span><span class="node cyan">bus-smartpay<br>Event Bus</span><span class="arrow">→</span><span class="node cyan">rule · filter<br>topic</span><span class="arrow">→</span><span class="node">colas destino</span></div>
   <div class="fork">
     <div>
-      <pre class="code"><span class="kw">private</span> Map&lt;String, MessageAttributeValue&gt;
+      <pre class="code"><span class="cm">// El productor marca el topic como atributo del mensaje</span>
+<span class="kw">private</span> Map&lt;String, MessageAttributeValue&gt;
 <span class="fn">buildAttributes</span>(String traceId, OutboundMessage message) {
   Map&lt;String, MessageAttributeValue&gt; attributes =
       <span class="kw">new</span> LinkedHashMap&lt;&gt;();
   attributes.put(
       SqsMessageConstants.TOPIC_ATTRIBUTE_KEY,
-      buildAttributeValue(message.getTopic()));
+      buildAttributeValue(message.getTopic())); <span class="cm">// NOVEDAD_EVALUADA</span>
   buildMetadataAttributes(traceId, message.getMetadata())
       .forEach((key, value) ->
           attributes.put(key, buildAttributeValue(value)));
   <span class="kw">return</span> attributes;
 }</pre>
-      <div class="legend"><span><b class="blue">SQS</b> buffer y aislamiento temporal</span><span><b class="accent">EventBridge</b> routing</span></div>
+      <div class="legend"><span><b class="blue">Pipe</b> conecta source → bus sin lógica</span><span><b class="accent">EventBridge</b> filtra y hace fan-out</span></div>
     </div>
     <div class="routes">
-      <div class="route"><span>ms-novedades</span><span></span><b>q-novedades</b></div>
+      <div class="route"><span>Source SQS</span><span></span><b>Pipe EventBridge</b></div>
       <div class="route"><span>Pipe</span><span></span><b>bus-smartpay</b></div>
-      <div class="route"><span>topic = resultado</span><span></span><b>notificacion-core</b></div>
-      <div class="route"><span>topic = resultado</span><span></span><b>SF novedades</b></div>
-      <div class="route"><span>topic manual</span><span></span><b>notificacion-front</b></div>
-      <div class="callout">El tramo ms-novedades → motor-reglas-novedades permanece pipe-a-pipe. El resultado del motor entra al bus y allí ocurre el fan-out.</div>
+      <div class="route"><span>topic=NOVEDAD_EVALUADA</span><span></span><b>q-novedades</b></div>
+      <div class="route"><span>topic=NOVEDAD_EVALUADA</span><span></span><b>notificacion-core</b></div>
+      <div class="route"><span>topic=NOVEDAD_RECIBIDA</span><span></span><b>motor-reglas</b></div>
+      <div class="callout">Un solo evento en el bus alcanza varias colas: cada rule evalúa el <b>MessageAttribute</b> <code>topic</code> y entrega solo a los targets que coinciden.</div>
     </div>
   </div>
-  <div class="decision"><div><b>Desacoplamiento</b>Cada consumidor recibe su propia cola.</div><div><b>Filtrado</b>El atributo topic determina la regla.</div><div><b>Trade-off</b>Consistencia eventual y duplicados posibles.</div></div>
-  <div class="source">ASULADO novedades · SqsChangesMessagePublisherAdapter.java · SQSProducer.java · smartpay-arquitectura.html</div>
+  <div class="decision"><div><b>Pipe</b>Enlaza fuente y bus sin código intermedio ni un servicio que reenvíe.</div><div><b>Fan-Out</b>Rules por topic activan destinos independientes desde un mismo evento.</div><div><b>SQS por consumidor</b>Backlog, ritmo, retries y fallos aislados: si notificación cae, la orquestación sigue.</div></div>
+  <div class="source">ASULADO novedades · SqsChangesMessagePublisherAdapter.java · SQSProducer.java · Flujo lote-PlanPagosEBFlow.drawio</div>
 </section>
 
-<section class="slide" data-title="Mensajería · entrega y fallos">
+<section class="slide" data-title="Mensajería · entrega y fallos" data-gap="Cloud" data-level="4" data-kind="fortaleza">
   <div class="slide-no">09 · SQS · entrega y recuperación</div>
   <h2>At-least-once exige ACK correcto e idempotencia</h2>
   <div class="flow"><span class="node blue">receive</span><span class="arrow">→</span><span class="node">invisible<br>30 s</span><span class="arrow">→</span><span class="node cyan">procesar</span><span class="arrow">→</span><span class="node">delete ACK</span><span class="arrow">→</span><span class="node amber">fin</span></div>
@@ -204,7 +218,7 @@ ReceiveMessageRequest.builder()
   <div class="source">ASULADO liquidación · SQSListener.java · SQSProcessor.java · application.yaml</div>
 </section>
 
-<section class="slide" data-title="Step Functions">
+<section class="slide" data-title="Step Functions" data-gap="Cloud" data-level="4" data-kind="fortaleza">
   <div class="slide-no">10 · AWS Step Functions</div>
   <h2>Task token, retry declarativo y ruta explícita de error</h2>
   <div class="grid2">
@@ -231,8 +245,73 @@ ReceiveMessageRequest.builder()
   <div class="source">state-machine-novedades · novedades.asl.json · stepfunctions_graph.png como referencia complementaria</div>
 </section>
 
-<section class="slide" data-title="Containers">
-  <div class="slide-no">11 · Docker + Kubernetes</div>
+<section class="slide" data-title="Fargate · cómputo serverless" data-gap="Cloud" data-level="4" data-kind="fortaleza">
+  <div class="slide-no">11 · Cloud · AWS Fargate</div>
+  <h2>Ejecutar los servicios sin administrar nodos de Kubernetes</h2>
+  <div class="brief"><div><span class="label">Contexto</span><strong>Los servicios (recepción, liquidación, dispersión, motores) corren en contenedores y necesitan escalar por carga.</strong></div><div><span class="label">Decisión</span><strong>Se descartó un EKS con nodos autoadministrados y se ejecutan las tareas en AWS Fargate.</strong></div></div>
+  <div class="grid2">
+    <div class="panel">
+      <h3 class="red">EKS autoadministrado · descartado</h3>
+      <ul>
+        <li>Nodo maestro y nodos esclavos dimensionados a mano (8/16, 4/8 GB).</li>
+        <li>Parcheo del SO, versiones del kernel y del kubelet a cargo del equipo.</li>
+        <li>Capacidad reservada aunque los servicios estén ociosos.</li>
+        <li>Scheduling, autoscaling de nodos y drenado operados por nosotros.</li>
+      </ul>
+      <div class="callout red tight">Más infraestructura que mantener sin que aporte al negocio.</div>
+    </div>
+    <div class="panel">
+      <h3 class="accent">AWS Fargate · elegido</h3>
+      <ul>
+        <li>Cada tarea declara su CPU y memoria; AWS provee el runtime.</li>
+        <li>No hay nodos que parchear ni capacidad base que sostener.</li>
+        <li>Escala por tarea según demanda, no por servidor.</li>
+        <li>Menor superficie operativa: el equipo se concentra en el contenedor.</li>
+      </ul>
+      <div class="callout tight">Fargate encaja cuando la carga es contenedores stateless con escalado elástico y sin necesidad de control fino del nodo.</div>
+    </div>
+  </div>
+  <div class="flow tight"><span class="node blue">Imagen del servicio</span><span class="arrow">→</span><span class="node cyan">Task Definition<br>CPU · RAM</span><span class="arrow">→</span><span class="node amber">Fargate</span><span class="arrow">→</span><span class="node">recepción · liquidación<br>dispersión · motores</span></div>
+  <div class="source">Arquitectura SmartPay · Flujo lote-PlanPagosEBFlow.drawio · deployment (contenedores)</div>
+</section>
+
+<section class="slide" data-title="WebSocket · push en tiempo real" data-gap="Protocolos" data-level="4" data-kind="fortaleza">
+  <div class="slide-no">12 · Protocolos · WebSocket</div>
+  <h2>Empujar el resultado al frontend sin que el cliente haga polling</h2>
+  <div class="brief"><div><span class="label">Problema</span><strong>El resultado de una novedad se resuelve de forma asíncrona en el backend. El frontend necesita el estado en cuanto existe, no consultando en bucle.</strong></div><div><span class="label">Solución</span><strong>API Gateway WebSocket: el cliente abre un canal persistente, se guarda su connectionId y el backend hace push cuando el evento llega.</strong></div></div>
+  <div class="grid2">
+    <div>
+      <div class="flow vertical"><span class="node blue">Actor · connect</span><span class="arrow">→</span><span class="node cyan">API GW WebSocket</span><span class="arrow">→</span><span class="node">lambda-socket-connect</span><span class="arrow">→</span><span class="node amber">DynamoDB<br>connectionId</span></div>
+      <div class="callout tight">Rutas del gateway: <code>$connect</code> registra la conexión, <code>$disconnect</code> la elimina y un heartbeat mantiene vivo el canal.</div>
+    </div>
+    <div>
+      <div class="flow vertical"><span class="node blue">MS novedades → result</span><span class="arrow">→</span><span class="node amber">MessageAttribute<br>destination=FRONTEND</span><span class="arrow">→</span><span class="node">Pipe</span><span class="arrow">→</span><span class="node cyan">lambda-notificacion-frontend</span><span class="arrow">→</span><span class="node">postToConnection</span></div>
+      <div class="callout tight">La lambda lee el <b>connectionId</b> en DynamoDB y publica por <code>@connections</code>. Reutiliza el mismo fan-out por atributos del slide anterior.</div>
+    </div>
+  </div>
+  <div class="grid2 tight">
+    <pre class="code"><span class="cm">// $connect: se persiste el identificador de la conexión</span>
+<span class="kw">exports</span>.handler = <span class="kw">async</span> (event) => {
+  <span class="kw">const</span> connectionId = event.requestContext.connectionId;
+  <span class="kw">await</span> ddb.putItem({
+    TableName: <span class="str">"ids-de-conexion"</span>,
+    Item: { pk: { S: connectionId } }
+  });
+  <span class="kw">return</span> { statusCode: <span class="str">200</span> };
+};</pre>
+    <pre class="code"><span class="cm">// notificacion-frontend: push del resultado por el canal abierto</span>
+<span class="kw">const</span> api = <span class="kw">new</span> ApiGatewayManagementApi({ endpoint });
+<span class="kw">await</span> api.postToConnection({
+  ConnectionId: connectionId,
+  Data: JSON.stringify(resultado)
+});</pre>
+  </div>
+  <div class="decision"><div><b>vs polling HTTP</b>Sin ciclos de consulta vacíos ni latencia entre intervalos: el servidor emite al ocurrir el evento.</div><div><b>Estado</b>El canal es full-duplex y persistente; el connectionId conecta un evento asíncrono con el cliente correcto.</div><div><b>Trade-off</b>Hay que gestionar el ciclo de vida de la conexión y limpiar entradas obsoletas.</div></div>
+  <div class="source">SmartPay novedades · lambda-socket-connect · lambda-socket-disconnect · lambda-notificacion-frontend · Flujo lote-PlanPagosEBFlow.drawio</div>
+</section>
+
+<section class="slide" data-title="Containers" data-gap="Contenedores" data-level="3" data-kind="brecha">
+  <div class="slide-no">13 · Docker + Kubernetes</div>
   <h2>Build reproducible y runtime con privilegios mínimos</h2>
   <div class="grid2">
     <div><pre class="code"><span class="kw">FROM</span> gradle:8.14.3-jdk21-alpine <span class="kw">AS</span> builder
@@ -265,8 +344,8 @@ livenessProbe:
   <div class="source">Franquicias · deployment/Dockerfile · docker-compose.yml · ASULADO novedades · deployment/k8s/deployment.yaml · hpa.yaml</div>
 </section>
 
-<section class="slide" data-title="Redis · cache-aside">
-  <div class="slide-no">12 · Cache / Redis</div>
+<section class="slide" data-title="Redis · cache-aside" data-gap="Caché" data-level="3" data-kind="brecha">
+  <div class="slide-no">14 · Cache / Redis</div>
   <h2>Cache-aside con TTL e invalidación explícita</h2>
   <div class="flow"><span class="node blue">GET Redis</span><span class="arrow">→</span><span class="node cyan">hit: usar Tarjeta</span><span class="arrow">/</span><span class="node amber">miss: consultar R2DBC</span><span class="arrow">→</span><span class="node">SET TTL 5 días</span></div>
   <div class="grid2 tight">
@@ -296,8 +375,8 @@ livenessProbe:
   <div class="source">gift-card-back-cards · ValidarActivacionTarjetaUseCase.java · TarjetaRedisService.java · RedisCacheService.java</div>
 </section>
 
-<section class="slide" data-title="Testing reactivo">
-  <div class="slide-no">13 · Testing</div>
+<section class="slide" data-title="Testing reactivo" data-gap="Pruebas" data-level="4" data-kind="fortaleza">
+  <div class="slide-no">15 · Testing</div>
   <h2>Las pruebas verifican señales, lotes y continuidad tras fallos</h2>
   <div class="grid2">
     <pre class="code"><span class="cm">// 201 registros: 100 + 100 + 1</span>
@@ -324,8 +403,8 @@ assertEquals(RECARGA_EXITOSA.name(), resultados.get(<span class="str">1</span>))
   <div class="source">gift-card-back-bulk-authorizations · EjecucionRecargaMasivaUseCaseTest.java</div>
 </section>
 
-<section class="slide" data-title="Bases de datos · ACID y CAP">
-  <div class="slide-no">14 · Bases de datos</div>
+<section class="slide" data-title="Bases de datos · ACID y CAP" data-gap="Bases de datos" data-level="3" data-kind="brecha">
+  <div class="slide-no">16 · Bases de datos</div>
   <h2>Transacciones R2DBC y consistencia en DynamoDB</h2>
   <div class="grid2">
     <div class="panel">
@@ -360,18 +439,18 @@ GetItemRequest.builder()
 </section>
 
 <section class="slide" data-title="Mapa de competencias">
-  <div class="slide-no">15 · Mapa final</div>
+  <div class="slide-no">17 · Mapa final</div>
   <h2>Competencia y evidencia presentada</h2>
   <div class="bigmap">
     <div>Frameworks</div><div>Beans READ/WRITE, @Qualifier, @Primary, ApplicationContext, JWT y ReactiveJwtDecoder</div>
     <div>Concurrencia</div><div>Flux desde S3, backpressure, buffer, concatMap, aislamiento de llamadas bloqueantes y límites por réplica</div>
-    <div>Cloud</div><div>SQS, EventBridge, Pipes, fan-out, Step Functions, task token, Retry y Catch</div>
+    <div>Cloud</div><div>EventBridge, Event Bus, Pipes, fan-out por MessageAttribute, SQS por consumidor, Step Functions y AWS Fargate</div>
     <div>Arquitectura</div><div>Puertos, casos de uso, adaptadores HTTP, Mongo, R2DBC y AWS</div>
     <div>Contenedores</div><div>Docker multi-stage, JRE Alpine, non-root, Compose, Kubernetes, probes, recursos y HPA</div>
     <div>Caché</div><div>Redis reactivo, cache-aside, TTL, invalidación, datos obsoletos y stampede</div>
     <div>Bases de datos</div><div>TransactionalOperator, ACID, índice único parcial, DynamoDB por claves, lectura fuerte, GSI/LSI, CAP y BASE</div>
     <div>Pruebas</div><div>StepVerifier, lotes, continuidad ante error individual y conservación de progreso parcial</div>
-    <div>Protocolos</div><div>HTTP REST, WebSocket en SmartPay y mensajería asíncrona con SQS/EventBridge</div>
+    <div>Protocolos</div><div>HTTP REST y WebSocket sobre API Gateway con connectionId en DynamoDB para push en tiempo real al frontend</div>
   </div>
 </section>
 
@@ -385,8 +464,10 @@ GetItemRequest.builder()
 <script>
 const slides=[...document.querySelectorAll('.slide')];
 const counter=document.getElementById('counter'),bar=document.getElementById('bar'),titlemini=document.getElementById('titlemini');
+const gapBadge=document.getElementById('gapBadge'),gapName=document.getElementById('gapName'),gapLvl=document.getElementById('gapLvl'),gapTag=document.getElementById('gapTag');
+function updateGap(slide){const gap=slide.dataset.gap;if(!gap){gapBadge.classList.remove('on');return;}const kind=slide.dataset.kind||'brecha';gapName.textContent=gap;gapLvl.textContent='Nivel '+(slide.dataset.level||'—');gapTag.textContent=kind==='fortaleza'?'Fortaleza':'Brecha';gapBadge.classList.remove('brecha','fortaleza');gapBadge.classList.add(kind);gapBadge.classList.add('on');}
 let index=0;
-function show(n,writeHash=true){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((slide,i)=>slide.classList.toggle('active',i===index));counter.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');bar.style.width=((index+1)/slides.length*100)+'%';titlemini.textContent=slides[index].dataset.title;if(writeHash)history.replaceState(null,'','#'+(index+1));}
+function show(n,writeHash=true){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((slide,i)=>slide.classList.toggle('active',i===index));counter.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');bar.style.width=((index+1)/slides.length*100)+'%';titlemini.textContent=slides[index].dataset.title;updateGap(slides[index]);if(writeHash)history.replaceState(null,'','#'+(index+1));}
 function next(){show(index+1)} function prev(){show(index-1)}
 document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;document.getElementById('full').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.();
 addEventListener('keydown',event=>{if(['ArrowRight',' ','PageDown'].includes(event.key)){event.preventDefault();next()}if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();prev()}if(event.key==='Home')show(0);if(event.key==='End')show(slides.length-1);if(event.key.toLowerCase()==='f')document.getElementById('full').click()});

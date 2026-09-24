@@ -246,21 +246,25 @@ La arquitectura no elimina acoplamiento; lo orienta hacia abstracciones estables
 
 ---
 
-# Slide 8 — AWS Fan-Out en ASULADO
+# Slide 8 — Arquitectura event-driven y Fan-Out
 
 ## Qué mostrar
 
-El código que agrega `topic` a los `MessageAttributes` y el diagrama q-novedades → Pipe → EventBridge → colas independientes.
+El código que agrega `topic` a los `MessageAttributes` y el diagrama del flujo: MS novedades → SQS de resultado → Pipe de EventBridge → Event Bus → rule con filtro por topic → colas destino independientes.
 
 ## Qué decir
 
-“El microservicio construye un `OutboundMessage` con un topic, por ejemplo `NOVEDAD_RECIBIDA`. El adapter serializa el payload y agrega el topic y metadata como atributos SQS. Un Pipe lleva el mensaje al bus de EventBridge. Las rules evalúan el topic y envían el evento a las colas de notificación o a la entrada de la Step Function. Cada consumidor tiene backlog y ritmo propios.”
+1. **Contexto.** “Cuando el motor de reglas evalúa una novedad, varios procesos necesitan reaccionar al mismo resultado: novedades, notificación core y la orquestación. No quería que se llamaran entre sí de forma síncrona ni que un servicio conociera a los demás.”
+2. **Qué implementé.** “El microservicio publica un `OutboundMessage` con un topic, por ejemplo `NOVEDAD_EVALUADA`. El adapter serializa el payload y agrega el topic como MessageAttribute del mensaje SQS.”
+3. **Cómo funciona el flujo.** “Un EventBridge Pipe toma ese SQS como source y lo lleva al Event Bus sin código intermedio. En el bus, cada rule filtra por el atributo topic y reenvía el evento a las colas que coinciden. Un mismo evento termina en varias colas: eso es el fan-out.”
+4. **Decisiones técnicas.** “Usé Pipes para conectar source y destino sin montar un servicio que solo reenvíe. Puse una cola SQS por consumidor para aislarlos. El filtrado vive en la rule, no en el código.”
+5. **Beneficio técnico.** “Agregar un consumidor nuevo es crear una cola y una rule; no toco al productor. Y si notificación se cae, la orquestación sigue con su propio backlog.”
 
 ## Explicación técnica
 
-SQS proporciona almacenamiento temporal, polling, visibility timeout y entrega al menos una vez. EventBridge proporciona un bus y reglas de routing. En este flujo no se encontró SNS; no se debe afirmar que forma parte de esta implementación.
+SQS aporta almacenamiento temporal, polling, visibility timeout y entrega al menos una vez. EventBridge aporta el Event Bus y las reglas de routing. Pipes es el pegamento declarativo entre una fuente y un destino. En este flujo no se encontró SNS; no debo afirmar que forma parte de la implementación.
 
-La arquitectura muestra una excepción: el tramo desde `ms-novedades` hasta el motor de reglas sigue siendo pipe-a-pipe. El resultado del motor sí pasa por EventBridge y allí ocurre el fan-out hacia notificación core y la State Machine.
+El diagrama muestra una excepción: el tramo desde `ms-novedades` hasta el motor de reglas se mantiene pipe-a-pipe. El resultado del motor sí entra al Event Bus y allí ocurre el fan-out hacia novedades, notificación core y la entrada de la State Machine.
 
 ## Preguntas que me pueden hacer
 
@@ -268,7 +272,7 @@ La arquitectura muestra una excepción: el tramo desde `ms-novedades` hasta el m
 
 ## Respuesta
 
-“Porque cada consumidor necesita disponibilidad, velocidad, retries y backlog independientes. Si notificación falla, la orquestación no debería detenerse.”
+“Porque cada consumidor necesita disponibilidad, ritmo, retries y backlog propios. Si notificación falla, la orquestación no debería detenerse.”
 
 ## Pregunta difícil
 
@@ -276,7 +280,7 @@ La arquitectura muestra una excepción: el tramo desde `ms-novedades` hasta el m
 
 ## Respuesta profunda
 
-“SNS resulta adecuado para pub/sub directo con routing relativamente simple y alto fan-out. EventBridge ofrece reglas más expresivas, buses por dominio, integración con múltiples destinos y mejor desacoplamiento semántico. SQS complementa ambos cuando necesito durabilidad, buffer y control del consumidor.”
+“SNS encaja en pub/sub directo con routing simple y alto fan-out. EventBridge ofrece reglas más expresivas, buses por dominio y muchos destinos, con mejor desacoplamiento semántico. SQS complementa a ambos cuando necesito durabilidad, buffer y control del consumidor.”
 
 ---
 
@@ -356,7 +360,83 @@ Standard conserva historial y permite ejecuciones largas. Express se orienta a a
 
 ---
 
-# Slide 11 — Containers
+# Slide 11 — Cloud: AWS Fargate
+
+## Qué mostrar
+
+El contraste EKS autoadministrado (descartado) vs Fargate (elegido) y el flujo imagen → Task Definition (CPU/RAM) → Fargate → servicios (recepción, liquidación, dispersión, motores).
+
+## Qué decir
+
+1. **Contexto.** “Los servicios corren en contenedores y deben escalar por carga. La decisión era cómo ejecutarlos.”
+2. **Qué implementé.** “Se descartó un EKS con nodos autoadministrados y se ejecutan las tareas en Fargate. Cada servicio declara su CPU y memoria en la Task Definition y AWS provee el runtime.”
+3. **Cómo funciona.** “No hay nodos maestro ni esclavos que dimensionar; Fargate levanta la tarea con los recursos declarados y escala por tarea según demanda.”
+4. **Decisiones técnicas.** “El diagrama original planteaba EKS con nodos fijos: 8 CPU/16 GB de maestro y esclavos de 4 CPU/8 GB. Eso implicaba parchear el SO, sostener capacidad ociosa y operar el autoscaling de nodos. Con contenedores stateless y escalado elástico, esa complejidad no aportaba.”
+5. **Beneficio técnico.** “Menos superficie operativa: sin parcheo de nodos ni capacidad base reservada. El equipo se concentra en el contenedor y se paga por lo que corre.”
+
+## Explicación técnica
+
+Fargate ejecuta contenedores sin exponer la infraestructura de nodos. Encaja cuando la carga es stateless, se necesita escalado por tarea y no hace falta control fino del nodo (DaemonSets, GPUs específicas, afinidad avanzada). Un EKS autoadministrado tiene sentido cuando se requiere ese control o una densidad de contenedores que reduzca costo frente a Fargate.
+
+Este es un supuesto de diseño derivado del diagrama, que marca EKS como descartado y Fargate como destino de cómputo; no verifiqué manifiestos de Fargate en el repositorio.
+
+## Preguntas que me pueden hacer
+
+¿Cuándo volverías a EKS?
+
+## Respuesta
+
+“Si necesitara control del nodo, addons a nivel de cluster, GPU, o una densidad alta de contenedores donde el costo por tarea de Fargate deje de convenir.”
+
+## Pregunta difícil
+
+¿Cómo escala Fargate frente al autoscaling de nodos de EKS?
+
+## Respuesta profunda
+
+“Fargate escala por tarea: cada tarea es una unidad de cómputo aislada, sin esperar a que un nodo tenga capacidad o a que el cluster autoscaler agregue instancias. En EKS el pod espera un nodo con espacio y, si no lo hay, se aprovisiona uno nuevo, lo que suma latencia de arranque y capacidad reservada.”
+
+---
+
+# Slide 12 — Protocolos: WebSocket
+
+## Qué mostrar
+
+El flujo de conexión (Actor → API Gateway WebSocket → `lambda-socket-connect` → connectionId en DynamoDB) y el flujo de push (result con `destination=FRONTEND` → Pipe → `lambda-notificacion-frontend` → `postToConnection`). Los dos fragmentos: registro de conexión y envío del resultado.
+
+## Qué decir
+
+1. **Contexto.** “El resultado de una novedad se resuelve de forma asíncrona en el backend. El frontend necesita el estado en cuanto existe. Con HTTP tendría que consultar en bucle sin saber cuándo llega.”
+2. **Qué implementé.** “Expuse un WebSocket sobre API Gateway. El cliente hace `$connect`, la lambda de connect guarda su `connectionId` en DynamoDB, y hay rutas de `$disconnect` y heartbeat para el ciclo de vida del canal.”
+3. **Cómo funciona el flujo.** “Cuando el backend produce el resultado, el mensaje lleva el MessageAttribute `destination=FRONTEND`. Un Pipe lo entrega a `lambda-notificacion-frontend`, que lee el connectionId en DynamoDB y hace push por `postToConnection`. Reutiliza el mismo mecanismo de fan-out por atributos.”
+4. **Decisiones técnicas.** “Elegí WebSocket porque el canal es persistente y full-duplex: el servidor emite al ocurrir el evento. El connectionId es lo que conecta un evento asíncrono con el cliente correcto.”
+5. **Beneficio técnico.** “Cero polling: sin consultas vacías ni latencia entre intervalos. El estado llega al frontend apenas el backend lo resuelve.”
+
+## Explicación técnica
+
+API Gateway administra las conexiones y expone rutas `$connect`, `$disconnect` y personalizadas. El estado de la conexión no vive en la lambda: se persiste el connectionId en DynamoDB para poder ubicarlo cuando llegue el evento. El push se hace contra el endpoint de `@connections`. El heartbeat evita que el gateway cierre canales inactivos.
+
+No debo presentar esto como teoría de WebSocket: el punto es que resuelve la entrega asíncrona de un resultado hacia un cliente concreto.
+
+## Preguntas que me pueden hacer
+
+¿Por qué WebSocket y no polling o SSE?
+
+## Respuesta
+
+“Polling desperdicia consultas y agrega latencia hasta el siguiente intervalo. SSE es unidireccional; WebSocket es full-duplex y encaja si en el futuro el cliente también empuja. Con eventos asíncronos poco frecuentes, el push es más eficiente.”
+
+## Pregunta difícil
+
+¿Qué pasa con las conexiones muertas en DynamoDB?
+
+## Respuesta profunda
+
+“`$disconnect` borra el connectionId, pero puede no dispararse siempre. Manejaría el error `GoneException` de `postToConnection` para eliminar la entrada, y agregaría TTL en la tabla como red de seguridad para limpiar conexiones obsoletas.”
+
+---
+
+# Slide 13 — Containers
 
 ## Qué mostrar
 
@@ -392,7 +472,7 @@ Requests participan en scheduling y garantizan recursos. Limits ponen techo. Rea
 
 ---
 
-# Slide 12 — Redis y cache-aside
+# Slide 14 — Redis y cache-aside
 
 ## Qué mostrar
 
@@ -428,7 +508,7 @@ El código usa Strings con objetos serializados. Redis también ofrece Hashes, L
 
 ---
 
-# Slide 13 — Testing reactivo
+# Slide 15 — Testing reactivo
 
 ## Qué mostrar
 
@@ -462,7 +542,7 @@ El caso fatal de S3 emite cien registros y luego `onError`; la prueba verifica q
 
 ---
 
-# Slide 14 — Bases de datos: ACID, TCL, CAP y BASE
+# Slide 16 — Bases de datos: ACID, TCL, CAP y BASE
 
 ## Qué mostrar
 
@@ -500,7 +580,7 @@ CAP solo obliga una elección cuando hay una partición de red. BASE describe si
 
 ---
 
-# Slide 15 — Mapa de competencias
+# Slide 17 — Mapa de competencias
 
 ## Qué mostrar
 
@@ -532,7 +612,7 @@ No introducir evidencia nueva. Si el evaluador elige una fila, volver a la slide
 
 ---
 
-# Slide 16 — Preguntas
+# Slide 18 — Preguntas
 
 ## Qué mostrar
 
